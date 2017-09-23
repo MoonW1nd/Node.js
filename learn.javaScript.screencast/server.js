@@ -1,6 +1,19 @@
-var user = require('./user');
+var User = require('./user');
+var db = require('./db');
+var log = require('./logger')(module);
+db.connect();
 
-var moon = new user.User('Moon');
-var mad = new user.User('Mad');
+function run() {
+	var moon = new User('Moon');
+	var mad = new User('Mad');
+	moon.hello(mad);
+	log(db.getPhrase('Run successful'));
+}
 
-moon.hello(mad);
+//если у модуля есть родитель знаит мы экспортируем нужные свойства,
+//если же нет то запускаем функцию run
+if (module.parent) {
+	exports.run = run;
+} else {
+	run();
+}
