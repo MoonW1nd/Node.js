@@ -1,4 +1,4 @@
-var db = require('../db');
+var db = require('../db/index');
 var log = require('../logger')(module);
 
 function User(name) {
@@ -7,12 +7,11 @@ function User(name) {
 
 User.prototype.hello = function (who) {
 	try {
-		log(db.getPhrase("Hell") + ', '+ who.name);
+		log(db.getPhrase("Hello") + ', '+ who.name);
 	} catch (e) {
 		console.error("Ошибка: %s\n сообщение: %s\n stack: %s\n",e.name, e.message, e.stack);
 	}
 };
-log("User.js is required!");
 
 module.exports = User;
 

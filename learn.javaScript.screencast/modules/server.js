@@ -1,5 +1,5 @@
-var User = require('./user');
-var db = require('./db');
+var User = require('./user/index');
+var db = require('./db/index');
 var log = require('./logger')(module);
 db.connect();
 
