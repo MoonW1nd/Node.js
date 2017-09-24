@@ -4,7 +4,7 @@ var db = new EventEmitter;
 db.setMaxListeners(10);// установка максимального количества обработчиков(WARN! не забывать удалять обработчики)
 // для отслеживания утечек памяти может помочь модуль heapdump
 // emitter.listeners(event); - получить обработчики событий
-// EventEmitter.listenerCount(emitter,type); - выодит количество обработчиков 
+// EventEmitter.listenerCount(emitter,type); - выодит количество обработчиков
 
 function Request() {
 	var self = this;
