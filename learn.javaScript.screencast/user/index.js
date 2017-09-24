@@ -6,7 +6,11 @@ function User(name) {
 }
 
 User.prototype.hello = function (who) {
-	log(db.getPhrase("Hello") + ', '+ who.name);
+	try {
+		log(db.getPhrase("Hell") + ', '+ who.name);
+	} catch (e) {
+		console.error("Ошибка: %s\n сообщение: %s\n stack: %s\n",e.name, e.message, e.stack);
+	}
 };
 log("User.js is required!");
 
