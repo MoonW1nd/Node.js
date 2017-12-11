@@ -6,7 +6,7 @@ const storeController = require('../controllers/storeController');
 router.get('/', storeController.homePage);
 
 
-router.get('/reverse/:name', (req, res) => {
+router.get('/reverse//:name', (req, res) => {
 	// res.send('Work here!');
 	const reverse = [...req.params.name].reverse().join('');
 	res.send(reverse);
