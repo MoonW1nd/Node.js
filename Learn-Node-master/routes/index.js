@@ -11,7 +11,6 @@ router.post('/add', catchErrors(storeController.createStore));
 
 
 router.get('/reverse//:name', (req, res) => {
-	// res.send('Work here!');
 	const reverse = [...req.params.name].reverse().join('');
 	res.send(reverse);
 });
