@@ -1,20 +1,34 @@
 const mongoose = require('mongoose');
 const Store = mongoose.model('Store');
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
 
-
-
-// exports.myMiddleware = (req, res, next) => {
-// 	req.messageMiddleware = 'Hello from Middleware';
-// 	next();
-// };
-//
-// exports.homePage = (req, res) => {
-// 	console.log(req.messageMiddleware);
-// 	res.render('hello', {name: 'wes', dog: 'Puppy'});
-// };
+const multerOptions = {
+	storage: multer.memoryStorage(),
+	fileFilter(req, file, next) {
+		const isPhoto = file.mimeType.startsWith('image/');
+		if (isPhoto) {
+			next(null, true);
+		} else {
+			next({message: 'That file type isn\'t allowed!'}, false);
+		}
+	}
+};
 
 exports.addStore = (req, res) => {
 	res.render('editStore', { title: 'Add Store'});
+};
+
+exports.upload = multer(multerOptions).single('Photo');
+
+exports.resize = async (req, res, next) => {
+	// check no file for resize
+	if (!req.file) {
+		next(); //skip to the next middleware
+		return;
+	}
+	console.log(req.file);
 };
 
 exports.createStore = async (req, res) => {
@@ -38,6 +52,7 @@ exports.editStore = async (req, res) => {
 };
 
 exports.updateStore = async (req, res) => {
+	req.body.location.type = 'Point';
 	const store = await Store.findOneAndUpdate({ _id: req.params.id }, req.body, {
 		new: true,
 		runValidators: true
