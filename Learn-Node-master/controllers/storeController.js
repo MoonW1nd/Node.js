@@ -7,7 +7,7 @@ const uuid = require('uuid');
 const multerOptions = {
 	storage: multer.memoryStorage(),
 	fileFilter(req, file, next) {
-		const isPhoto = file.mimeType.startsWith('image/');
+		const isPhoto = file.mimetype.startsWith('image/');
 		if (isPhoto) {
 			next(null, true);
 		} else {
@@ -20,7 +20,7 @@ exports.addStore = (req, res) => {
 	res.render('editStore', { title: 'Add Store'});
 };
 
-exports.upload = multer(multerOptions).single('Photo');
+exports.upload = multer(multerOptions).single('photo');
 
 exports.resize = async (req, res, next) => {
 	// check no file for resize

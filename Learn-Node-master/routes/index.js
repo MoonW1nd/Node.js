@@ -16,7 +16,8 @@ router.post('/add',
 router.post('/add/:id',
 	 storeController.upload,
 	 catchErrors(storeController.resize),
-	 catchErrors(storeController.updateStore));
+	 catchErrors(storeController.updateStore)
+);
 
 router.get('/store/:id/edit', catchErrors(storeController.editStore));
 
