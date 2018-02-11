@@ -36,7 +36,7 @@ const storeSchema = new mongoose.Schema({
 	author: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'User',
-		required: 'You must supply author'
+		required: 'You must supply author!'
 	}
 });
 
