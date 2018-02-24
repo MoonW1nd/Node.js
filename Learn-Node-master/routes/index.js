@@ -9,19 +9,19 @@ const { catchErrors } = require('../handlers/errorHandlers');
 router.get('/', catchErrors(storeController.getStores));
 router.get('/stores', catchErrors(storeController.getStores));
 router.get('/add',
-	 authController.isLoggedIn,
-	 storeController.addStore
+  authController.isLoggedIn,
+  storeController.addStore
 );
 
 router.post('/add',
-	 storeController.upload,
-	 catchErrors(storeController.resize),
-	 catchErrors(storeController.createStore)
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.createStore)
 );
 router.post('/add/:id',
-	 storeController.upload,
-	 catchErrors(storeController.resize),
-	 catchErrors(storeController.updateStore)
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.updateStore)
 );
 
 router.get('/store/:id/edit', catchErrors(storeController.editStore));
@@ -44,9 +44,9 @@ router.get('/register', userController.registerForm);
 
 
 router.post('/register',
-	 userController.validateRegister,
-	 userController.register,
-	 authController.login
+  userController.validateRegister,
+  userController.register,
+  authController.login
 );
 
 router.get('/account', authController.isLoggedIn, userController.account);
@@ -54,5 +54,11 @@ router.post('/account', catchErrors(userController.updateAccount));
 router.post('/account/forgot', catchErrors(authController.forgot));
 router.get('/account/reset/:token', catchErrors(authController.reset));
 router.post('/account/reset/:token', authController.confirmedPasswords, catchErrors(authController.update));
+
+/*
+  API
+ */
+
+router.get('/api/search', catchErrors(storeController.searchStores));
 
 module.exports = router;
